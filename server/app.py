@@ -7,7 +7,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+app.json_serializer = None  # Resetting to default JSON serialization behavior
 
 CORS(app)
 migrate = Migrate(app, db)
@@ -31,12 +31,12 @@ def create_message():
 
 @app.route('/messages/<int:id>', methods=['GET'])
 def get_message_by_id(id):
-    message = Message.query.get_or_404(id)
+    message = db.session.query(Message).filter_by(id=id).first_or_404()
     return jsonify(message.to_dict())
 
 @app.route('/messages/<int:id>', methods=['PATCH'])
 def update_message(id):
-    message = Message.query.get_or_404(id)
+    message = db.session.query(Message).filter_by(id=id).first_or_404()
     data = request.get_json()
     if 'body' in data:
         message.body = data['body']
@@ -48,7 +48,7 @@ def update_message(id):
 
 @app.route('/messages/<int:id>', methods=['DELETE'])
 def delete_message(id):
-    message = Message.query.get_or_404(id)
+    message = db.session.query(Message).filter_by(id=id).first_or_404()
     db.session.delete(message)
     db.session.commit()
     return '', 204

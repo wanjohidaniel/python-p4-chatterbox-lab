@@ -1,0 +1,23 @@
+{
+  "name": "python-p4-chatterbox-lab",
+  "version": "1.0.0",
+  "description": "## Learning Goals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wanjohidaniel/python-p4-chatterbox-lab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wanjohidaniel/python-p4-chatterbox-lab/issues"
+  },
+  "homepage": "https://github.com/wanjohidaniel/python-p4-chatterbox-lab#readme",
+  "devDependencies": {
+    "json-server": "^1.0.0-beta.1"
+  }
+
+}
